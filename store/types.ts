@@ -2,7 +2,7 @@ import {currencies} from "./data"
 
 export type Currency = (typeof currencies)[number]
 
-export interface Converter {
+export interface State {
     from: Currency,
     to: Currency,
     amount: number,

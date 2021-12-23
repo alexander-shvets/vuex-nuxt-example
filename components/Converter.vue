@@ -15,7 +15,7 @@ export default {
             ['from', 'to', 'amount', 'result']
         ),
         ...mapMutations({
-            amount(amount){ this.$store }
+            amount(amount){ this.$store.commit('set', {amount}) }
         }),
     },
     

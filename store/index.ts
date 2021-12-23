@@ -1,9 +1,9 @@
-import { Converter } from "./types"
+import { State } from "./types"
 import { currencies, percents } from "./data"
 import { convert, generatePairs, addRates, addCommisions } from "./logic"
 
 import { ActionContext } from "vuex"
-type Action = ActionContext<Converter, Converter>
+type Action = ActionContext<State, State>
 
 export const state = () => ({
     from: "USD",
@@ -12,15 +12,15 @@ export const state = () => ({
 
     rates: [],
     commisions: [],
-} as Converter)
+} as State)
 
 export const getters = {
-    result: ({ amount, from, to, rates, commisions }: Converter) => 
+    result: ({ amount, from, to, rates, commisions }: State) => 
         convert(amount, from, to, rates, commisions)
 }
 
 export const mutations = {
-    setState: (state: Converter, data: Partial<Converter>) =>
+    set: (state: State, data: Partial<State>) =>
         Object.assign(state, data)
 }
 
