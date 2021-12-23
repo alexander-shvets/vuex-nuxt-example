@@ -3,8 +3,8 @@ import { currencies } from '~/store/data'
 
 export default {
     props: {
-        value: '',
-        base: '',
+        value: String,
+        base: String,
     },
     data: () => ({
         input: '',
@@ -20,6 +20,7 @@ export default {
     methods: {
         validate( event ){
             const { input, list } = this
+            //const input = this.input.toUpperCase()
             if( input in list ){ 
                 //this.value = input
             }else if( ! list.some( item => item.includes(input, 0) ) ){

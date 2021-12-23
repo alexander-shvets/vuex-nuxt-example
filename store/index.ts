@@ -20,28 +20,21 @@ export const getters = {
 }
 
 export const mutations = {
-    set: (state: State, data: Partial<State>) =>
-        Object.assign(state, data)
+    set: (state: State, payload: Partial<State>) =>
+        Object.assign(state, payload) && console.log('set',payload)
 }
 
-export const actions = () => {
-    const pairs = generatePairs(currencies)
-    return {
-        async update({ dispatch, commit }: Action) {
-            await Promise.all([
-                dispatch('updateRates'),
-                dispatch('updateCommisions'),
-            ])
-            commit('update')
-        },
-
-        updateRates({ commit, state }: Action) {
-            state.rates = addRates(pairs)
-            commit('updateRates')
-        },
-        updateCommisions({ commit, state }: Action) {
-            state.commisions = addCommisions(pairs, percents)
-            commit('updateCommisions')
-        },
-    }
+export const actions = {
+    updateRates({ commit }: Action) {
+        console.log('updateRates')
+        const pairs = generatePairs(currencies)
+        const rates = addRates(pairs)
+        commit('set', {rates})
+    },
+    updateCommisions({ commit }: Action) {
+        console.log('updateCommisions')
+        const pairs = generatePairs(currencies)
+        const commisions = addCommisions(pairs, percents)
+        commit('set', {commisions})
+    },
 }

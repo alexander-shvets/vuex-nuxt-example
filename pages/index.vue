@@ -1,5 +1,5 @@
 <template>
-  <Converter/>
+  <Converter />
 </template>
 
 <script lang="ts">
