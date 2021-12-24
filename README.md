@@ -1,5 +1,7 @@
 # vuex-nuxt-example
 
+Preview: https://alexander-shvets.github.io/vuex-nuxt-example/
+
 ## Build Setup
 
 ```bash
