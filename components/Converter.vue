@@ -31,7 +31,7 @@ export default {
     mounted(){
         const { updateInterval } = this
         if( updateInterval ){
-            const {dispatch} = this.$root.$store
+            const {dispatch} = this.store
             const update = () => {
                 dispatch('updateRates')
                 dispatch('updateCommisions')
