@@ -3,14 +3,11 @@ import { currencies } from '~/store/data'
 
 export default {
     props: {
-        value: String,
+        //value: String,
         base: String,
     },
-    // model: {
-    //     prop: 'value',
-    //     event: 'input'
-    // },
     data: () => ({
+        value: '',
         input: '',
         selected: '',
     }),
@@ -24,13 +21,13 @@ export default {
     methods: {
         validate( event ){
             const { value, list } = this
-            //const input = this.input.toUpperCase()
+            const input = this.input.toUpperCase()
             if( input in list ){ 
-                //this.value = input
+                this.value = input
+                this.$emit('input', input)
             }else if( ! list.some( item => item.includes(value, 0) ) ){
                 event.preventDefault()
             }
-            this.$emit('input', value)
         },
         select({target: {value}}){
             //this.input = value
