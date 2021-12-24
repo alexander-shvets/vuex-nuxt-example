@@ -21,8 +21,9 @@ export default {
     methods: {
         validate( event ){
             const { value, list } = this
-            const input = this.input.toUpperCase()
-            if( input in list ){ 
+            const input = (value + event.key).toUpperCase()
+            console.log('input', input,value, this.input, event.key)
+            if( input in list ){
                 this.value = input
                 this.$emit('input', input)
             }else if( ! list.some( item => item.includes(value, 0) ) ){
@@ -38,7 +39,7 @@ export default {
 </script>
 <template lang="pug">
     span.currency-select
-        input(v-model="value" @keypress="validate" size="4")
+        input(v-model="value" @keypress="validate" size="5")
         select(v-model="value" @change="select")
             option(v-for="currency of list" :key="currency") {{ currency }}
 </template>

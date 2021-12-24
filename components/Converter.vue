@@ -56,7 +56,7 @@ export default {
 <template lang="pug">
     div.converter
         label Amount:
-            input(v-model="amount" @keypress="validateNumber" size="4")
+            input(v-model="amount" @keypress="validateNumber" size="5")
         label.currency.from From:
             CurrencySelect(v-model="from")
         label.currency.to To:
