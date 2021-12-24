@@ -33,6 +33,9 @@ export default {
                 }
             }
         },
+        autocomplete(){
+            this.input = this.select
+        },
         onSelected({target: {value}}){
             this.input = value
             this.$emit('input', value)
@@ -42,7 +45,7 @@ export default {
 </script>
 <template lang="pug">
     span.currency-select
-        input(v-model="input" @keypress.prevent="onInput" size="5")
+        input(v-model="input" @keypress.prevent="onInput" @blur="autocomplete" size="5")
         select(v-model="select" @change="onSelected")
             option(v-for="currency of list" :key="currency") {{ currency }}
 </template>
