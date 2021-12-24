@@ -1,5 +1,5 @@
 <script>
-import { currencies } from '~/store/data'
+import { currencies } from '~/logic/data'
 
 export default {
     props: {

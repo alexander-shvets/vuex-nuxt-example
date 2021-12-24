@@ -1,6 +1,6 @@
-import { State } from "./types"
-import { currencies, percents } from "./data"
-import { convert, generatePairs, addRates, addCommisions } from "./logic"
+import { State } from "../logic/types"
+import { currencies, percents } from "../logic/data"
+import { convert, generatePairs, addRates, addCommisions } from "../logic"
 
 import { ActionContext } from "vuex"
 type Action = ActionContext<State, State>
