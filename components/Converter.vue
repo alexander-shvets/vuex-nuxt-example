@@ -68,6 +68,8 @@ export default {
         width: max-content;
     }
     .converter > label{
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        margin: 0.2ex;
     }
 </style>
