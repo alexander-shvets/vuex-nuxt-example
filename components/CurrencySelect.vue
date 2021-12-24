@@ -46,8 +46,3 @@ export default {
         select(v-model="select" @change="onSelected")
             option(v-for="currency of list" :key="currency") {{ currency }}
 </template>
-<style scoped lang="scss">
-    .currency-select input{
-        margin-left: 1ex;
-    }
-</style>

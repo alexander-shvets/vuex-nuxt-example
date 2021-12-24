@@ -7,6 +7,7 @@ export default Vue.extend({name: 'IndexPage'})
 </template>
 <style lang="scss">
     body{
-      padding: 5ex;
+        padding: 5ex;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 </style>
