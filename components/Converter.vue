@@ -57,7 +57,7 @@ export default {
 }
 </script>
 <template lang="pug">
-    form.converter
+    form.converter(action="javascript:alert('Done')")
         label Amount:
             input(v-model="amount" @keypress="validateNumber" size="5")
         label.currency.from From:
@@ -66,7 +66,7 @@ export default {
             SelectInput(v-model="to" :base="from" :items="currencies")
         label.result {{ result }} {{ result ? to : '' }}
         footer
-            button(:disabled="amount == 0" onclick="alert('Done')" type="button") Convert
+            button(:disabled="amount == 0") Convert
 </template>
 <style scoped lang="scss">
     .converter{
