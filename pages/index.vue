@@ -1,5 +1,5 @@
 <template>
-  <Converter />
+  <Converter :update-interval="30" />
 </template>
 
 <script lang="ts">

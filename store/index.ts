@@ -26,13 +26,11 @@ export const mutations = {
 
 export const actions = {
     updateRates({ commit }: Action) {
-        console.log('updateRates')
         const pairs = generatePairs(currencies)
         const rates = addRates(pairs)
         commit('set', {rates})
     },
     updateCommisions({ commit }: Action) {
-        console.log('updateCommisions')
         const pairs = generatePairs(currencies)
         const commisions = addCommisions(pairs, percents)
         commit('set', {commisions})
