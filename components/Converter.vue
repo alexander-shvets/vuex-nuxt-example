@@ -1,13 +1,15 @@
 <script>
-import CurrencySelect from './CurrencySelect.vue'
+import SelectInput from './SelectInput.vue'
+import { currencies } from '~/logic/data'
 
 export default {
-    components: { CurrencySelect },
+    components: { SelectInput },
     props: {
         updateInterval: Number,
     },
     data: () => ({
         interval: NaN,
+        currencies,
     }),
     computed: {
         ...Object.fromEntries(
@@ -57,9 +59,9 @@ export default {
         label Amount:
             input(v-model="amount" name="amount" @keypress="validateNumber" size="5")
         label.currency.from From:
-            CurrencySelect(v-model="from")
+            SelectInput(v-model="from" :base="to" :items="currencies")
         label.currency.to To:
-            CurrencySelect(v-model="to" :base="from")
+            SelectInput(v-model="to" :base="from" :items="currencies")
         label.result {{ result }} {{ result ? to : '' }}
         label
             button(onclick="if(amount.value > 0) alert('Done')" type="button") Convert

@@ -1,22 +1,21 @@
 <script>
-import { currencies } from '~/logic/data'
-
 export default {
     props: {
         value: String,
         base: String,
+        items: Array,
     },
     data: function(){
         return {
-            input: this.value,
             select: this.value,
+            input: this.value,
         }
     },
     computed: {
         list(){
-            const {base} = this
-            if(base) return currencies.filter(item => item != base)
-            else return currencies
+            const {base, items} = this
+            if(base) return items.filter(item => item != base)
+            else return items
         },
     },
     methods: {
@@ -36,9 +35,9 @@ export default {
         autocomplete(){
             this.input = this.select
         },
-        onSelected({target: {value}}){
-            this.input = value
-            this.$emit('input', value)
+        onSelected(){
+            this.input = this.select
+            this.$emit('input', this.input)
         },
     },
 }
@@ -47,5 +46,5 @@ export default {
     span.currency-select
         input(v-model="input" @keypress.prevent="onInput" @blur="autocomplete" size="5")
         select(v-model="select" @change="onSelected")
-            option(v-for="currency of list" :key="currency") {{ currency }}
+            option(v-for="item in list" :key="item") {{ item }}
 </template>
