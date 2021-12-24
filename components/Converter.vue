@@ -18,7 +18,7 @@ export default {
         ...Object.fromEntries(
             ['from', 'to', 'amount'].map(
                 field => [field, {
-                    get(){return this.store.state[field]},
+                    get(){return this.store.state[field] || ''},
                     set( value ){this.store.commit('set', {[field]: value})}  
                 }]
             )
