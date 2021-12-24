@@ -59,14 +59,14 @@ export default {
 <template lang="pug">
     form.converter
         label Amount:
-            input(v-model="amount" name="amount" @keypress="validateNumber" size="5")
+            input(v-model="amount" @keypress="validateNumber" size="5")
         label.currency.from From:
             SelectInput(v-model="from" :base="to" :items="currencies")
         label.currency.to To:
             SelectInput(v-model="to" :base="from" :items="currencies")
         label.result {{ result }} {{ result ? to : '' }}
         footer
-            button(onclick="if(amount.value > 0) alert('Done')" type="button") Convert
+            button(:disabled="amount == 0" onclick="alert('Done')" type="button") Convert
 </template>
 <style scoped lang="scss">
     .converter{
