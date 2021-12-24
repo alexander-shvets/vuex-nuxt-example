@@ -21,7 +21,7 @@ export const getters = {
 
 export const mutations = {
     set: (state: State, payload: Partial<State>) =>
-        Object.assign(state, payload) && console.log('set',payload)
+        Object.assign(state, payload)
 }
 
 export const actions = {

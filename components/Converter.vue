@@ -20,7 +20,6 @@ export default {
         ),
         result(){
             const {from, to} = this.$root.$store.state
-            console.log(from, to)
             return Number(this.$root.$store.getters.result).toFixed(2)
         },
     },
