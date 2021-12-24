@@ -6,7 +6,7 @@ import { ActionContext } from "vuex"
 type Action = ActionContext<State, State>
 
 export const state = () => ({
-    from: "USD",
+    from: "EUR",
     to: "UAH",
     amount: 0,
 

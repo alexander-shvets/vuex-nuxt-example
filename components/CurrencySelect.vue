@@ -6,10 +6,12 @@ export default {
         value: String,
         base: String,
     },
-    data: () => ({
-        input: '',
-        select: '',
-    }),
+    data: function(){
+        return {
+            input: this.value,
+            select: this.value,
+        }
+    },
     computed: {
         list(){
             const {base} = this
