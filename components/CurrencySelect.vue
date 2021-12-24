@@ -3,13 +3,12 @@ import { currencies } from '~/logic/data'
 
 export default {
     props: {
-        //value: String,
+        value: String,
         base: String,
     },
     data: () => ({
-        value: '',
         input: '',
-        selected: '',
+        select: '',
     }),
     computed: {
         list(){
@@ -19,19 +18,21 @@ export default {
         },
     },
     methods: {
-        validate( event ){
-            const { value, list } = this
-            const input = (value + event.key).toUpperCase()
-            console.log('input', input,value, this.input, event.key)
-            if( input in list ){
-                this.value = input
-                this.$emit('input', input)
-            }else if( ! list.some( item => item.includes(value, 0) ) ){
-                event.preventDefault()
+        onInput({key}){
+            const { input, list } = this
+            const value = (input + key).toUpperCase()
+            if( value ){
+                const selectIndex = list.findIndex( item => item.indexOf(value) === 0)
+                if( selectIndex >= 0 ){
+                    const listValue = list[selectIndex]
+                    this.input = value
+                    this.select = listValue
+                    this.$emit('input', listValue)
+                }
             }
         },
-        select({target: {value}}){
-            //this.input = value
+        onSelected({target: {value}}){
+            this.input = value
             this.$emit('input', value)
         },
     },
@@ -39,8 +40,8 @@ export default {
 </script>
 <template lang="pug">
     span.currency-select
-        input(v-model="value" @keypress="validate" size="5")
-        select(v-model="value" @change="select")
+        input(v-model="input" @keypress.prevent="onInput" size="5")
+        select(v-model="select" @change="onSelected")
             option(v-for="currency of list" :key="currency") {{ currency }}
 </template>
 <style scoped lang="scss">
