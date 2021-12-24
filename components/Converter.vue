@@ -63,7 +63,7 @@ export default {
         label.currency.to To:
             SelectInput(v-model="to" :base="from" :items="currencies")
         label.result {{ result }} {{ result ? to : '' }}
-        label
+        footer
             button(onclick="if(amount.value > 0) alert('Done')" type="button") Convert
 </template>
 <style scoped lang="scss">
