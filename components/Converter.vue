@@ -7,22 +7,24 @@ export default {
     props: {
         updateInterval: Number,
     },
-    data: () => ({
-        interval: NaN,
-        currencies,
-    }),
+    data(){
+        return {
+            interval: NaN,
+            currencies,
+            store: this.$root.$store,
+        }
+    },
     computed: {
         ...Object.fromEntries(
             ['from', 'to', 'amount'].map(
                 field => [field, {
-                    get(){return this.$root.$store.state[field]},
-                    set( value ){this.$root.$store.commit('set', {[field]: value})}  
+                    get(){return this.store.state[field]},
+                    set( value ){this.store.commit('set', {[field]: value})}  
                 }]
             )
         ),
         result(){
-            const {from, to} = this.$root.$store.state
-            return Number(this.$root.$store.getters.result).toFixed(2)
+            return Number(this.store.getters.result).toFixed(2)
         },
     },
     
