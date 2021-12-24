@@ -8,8 +8,8 @@ export function convert(
 ){
     const pair = ({ base, quote }: Pair) => 
         from === base && to === quote;
-    const rate = Number( rates.find(pair)?.rate )
-    const commision = Number( commisions.find(pair)?.commision )
+    const rate = rates.find(pair)?.rate || 1
+    const commision = commisions.find(pair)?.commision || 0
     const gross = amount * rate
     return gross - commision * (gross / 100)
 }
