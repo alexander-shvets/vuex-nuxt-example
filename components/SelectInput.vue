@@ -43,7 +43,7 @@ export default {
 }
 </script>
 <template lang="pug">
-    span.currency-select
+    span.select-input
         input(v-model="input" @keypress.prevent="onInput" @blur="autocomplete" size="5")
         select(v-model="select" @change="onSelected")
             option(v-for="item in list" :key="item") {{ item }}

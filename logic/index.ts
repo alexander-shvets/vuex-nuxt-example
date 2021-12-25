@@ -1,7 +1,7 @@
 import { Currency, Pair, Rate, Commision } from "./types"
 const { random, floor } = Math
 
-export function convert(
+export function exchange(
     amount: number,
     from: Currency, to: Currency,
     rates: Rate[], commisions: Commision[]

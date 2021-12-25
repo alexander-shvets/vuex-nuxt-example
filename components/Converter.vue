@@ -1,6 +1,5 @@
 <script>
 import SelectInput from './SelectInput.vue'
-import { currencies } from '~/logic/data'
 
 export default {
     components: { SelectInput },
@@ -10,7 +9,6 @@ export default {
     data(){
         return {
             interval: NaN,
-            currencies,
             store: this.$root.$store,
         }
     },
@@ -58,23 +56,30 @@ export default {
 </script>
 <template lang="pug">
     form.converter(action="javascript:alert('Done')")
-        label Amount:
-            input(v-model="amount" @keypress="validateNumber" size="5")
-        label.currency.from From:
-            SelectInput(v-model="from" :base="to" :items="currencies")
-        label.currency.to To:
-            SelectInput(v-model="to" :base="from" :items="currencies")
-        label.result {{ result }} {{ result ? to : '' }}
-        footer
-            button(:disabled="amount == 0") Convert
+        label You pay
+            input(v-model="amount" @keypress="validateNumber" size="10")
+        label.from in
+            SelectInput(v-model="from" :base="to" :items="store.state.currencies")
+        label.to out
+            SelectInput(v-model="to" :base="from" :items="store.state.currencies")
+        label 
+            span You got 
+            span.result {{ result }} {{ to }}
+        footer 
+            button(:disabled="amount == 0") Exchange
 </template>
 <style scoped lang="scss">
     .converter{
-        width: max-content;
+        width: 19ex;
+        font-size: 12pt;
     }
-    .converter > label{
+    .converter > label {
         display: flex;
         justify-content: space-between;
-        margin: 0.2ex;
+        margin: 1ex 0ex;
+    }
+    footer{
+        margin-top: 1ex;
+        text-align: right;
     }
 </style>

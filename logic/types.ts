@@ -6,7 +6,7 @@ export interface State {
     from: Currency,
     to: Currency,
     amount: number,
-
+    currencies: Readonly<Currency[]>,
     rates: Rate[],
     commisions: Commision[],
 }
