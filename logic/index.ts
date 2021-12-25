@@ -1,5 +1,4 @@
 import { Currency, Pair, Rate, Commision } from "./types"
-const { random, floor } = Math
 
 export function exchange(
     amount: number,
@@ -14,29 +13,42 @@ export function exchange(
     return gross - commision * (gross / 100)
 }
 
-export const generatePairs = ( currencies: Readonly<Currency[]> ): Pair[] =>
-    currencies.map( base => 
-        currencies.map( quote => ({ base, quote }) )
-    ).flat()
-    .filter(({ base, quote }) => base != quote)
+export const generateCommisions = ( 
+    currencies: Readonly<Currency[]>, 
+    percents: number[] 
+): Commision[] =>
+    currencies.flatMap( base => 
+        currencies.map( quote => ({ 
+            base, quote, 
+            commision: takeRandom(percents) 
+        }))
+    )
 
-export const addCommisions = (
-    pairs: Pair[], 
-    percents: number[]
-): Commision[] => 
-    pairs.map( fields => ({
-        ...fields,
-        commision: takeRandom(percents)
-    }))
 
-export const addRates = ( pairs: Pair[] ): Rate[] =>
-    pairs.map( fields => ({
-        ...fields,
-        rate: random() * 100
-    }))
+export function generateRates(currencies: Readonly<Currency[]>){
+    let rates = new Array(currencies.length)
+    return currencies.flatMap( (base, baseIndex) => {
+        rates[baseIndex] = new Array(currencies.length)
+        return currencies.map( (quote, quoteIndex) => {
+            let rate = rates[quoteIndex] && rates[quoteIndex][baseIndex]
+            if( rate ){
+                rate = 1 / rate
+            }else{
+                rates[baseIndex][quoteIndex] = 
+                rate = (base === quote ? 1 : random(10, 100))
+            }
+            console.log(base, quote, rate.toFixed(2))
+            return {base, quote, rate}
+        })
+    })
+}
 
 function takeRandom( values: any[] ){
     const maxIndex = values.length - 1
-    const randomIndex = floor(random() * maxIndex)
+    const randomIndex = Math.floor(Math.random() * maxIndex)
     return values[randomIndex]
+}
+
+function random(min = 0, max = 100) {
+    return Math.random() * (max - min) + min
 }

@@ -5,7 +5,8 @@ export type Currency = (typeof currencies)[number]
 export interface State {
     from: Currency,
     to: Currency,
-    amount: number,
+    pay: number,
+    get: number,
     currencies: Readonly<Currency[]>,
     rates: Rate[],
     commisions: Commision[],

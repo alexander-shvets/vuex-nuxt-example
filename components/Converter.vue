@@ -9,20 +9,41 @@ export default {
     data(){
         return {
             interval: NaN,
+            userInput: '',
             store: this.$root.$store,
         }
     },
     computed: {
         ...Object.fromEntries(
-            ['from', 'to', 'amount'].map(
+            ['from', 'to', 'pay', 'get'].map(
                 field => [field, {
                     get(){return this.store.state[field] || ''},
                     set( value ){this.store.commit('set', {[field]: value})}  
                 }]
             )
         ),
-        result(){
-            return Number(this.store.getters.result).toFixed(2)
+        // result(){
+        //     return Number(this.store.getters.result).toFixed(2)
+        // },
+    },
+    watch: {
+        from(){
+            this.store.commit('pay')
+        },
+        to(){
+            this.store.commit('get')
+        },
+        pay(){
+            if( this.userInput == 'pay' ){
+                this.store.commit('pay')
+                this.userInput = ''
+            }
+        },
+        get(){
+            if( this.userInput == 'get' ){
+                this.store.commit('get')
+                this.userInput = ''
+            }
         },
     },
     
@@ -49,6 +70,8 @@ export default {
             const value = event.key + event.target.value
             if( value != parseFloat(value) ){
                 event.preventDefault()
+            }else{
+                this.userInput = event.target.name
             }
         },
     },
@@ -57,16 +80,15 @@ export default {
 <template lang="pug">
     form.converter(action="javascript:alert('Done')")
         label You pay
-            input(v-model="amount" @keypress="validateNumber" size="10")
+            input(v-model="pay" name="pay" @keypress="validateNumber" size="10")
         label.from in currency
             SelectInput(v-model="from" :base="to" :items="store.state.currencies")
         label.to out currency
             SelectInput(v-model="to" :base="from" :items="store.state.currencies")
-        label 
-            span You got 
-            span.result {{ result }} {{ to }}
+        label You got
+            input(v-model="get" name="get" @keypress="validateNumber" size="10")
         footer 
-            button(:disabled="amount == 0") Exchange
+            button(:disabled="(pay + get) == 0") Exchange
 </template>
 <style scoped lang="scss">
     .converter{
