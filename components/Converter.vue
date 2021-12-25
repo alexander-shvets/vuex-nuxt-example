@@ -58,9 +58,9 @@ export default {
     form.converter(action="javascript:alert('Done')")
         label You pay
             input(v-model="amount" @keypress="validateNumber" size="10")
-        label.from in
+        label.from in currency
             SelectInput(v-model="from" :base="to" :items="store.state.currencies")
-        label.to out
+        label.to out currency
             SelectInput(v-model="to" :base="from" :items="store.state.currencies")
         label 
             span You got 
@@ -76,7 +76,7 @@ export default {
     .converter > label {
         display: flex;
         justify-content: space-between;
-        margin: 1ex 0ex;
+        margin: 0.5ex 0ex;
     }
     footer{
         margin-top: 1ex;

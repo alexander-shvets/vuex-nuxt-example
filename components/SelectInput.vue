@@ -2,10 +2,10 @@
 export default {
     props: {
         value: String,
-        base: String,
         items: Array,
+        base:  String,
     },
-    data: function(){
+    data(){
         return {
             select: this.value,
             input: this.value,
