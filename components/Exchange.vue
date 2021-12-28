@@ -22,9 +22,6 @@ export default {
                 }]
             )
         ),
-        // result(){
-        //     return Number(this.store.getters.result).toFixed(2)
-        // },
     },
     watch: {
         from(){
@@ -36,13 +33,11 @@ export default {
         pay(){
             if( this.userInput == 'pay' ){
                 this.store.commit('pay')
-                this.userInput = ''
             }
         },
         get(){
             if( this.userInput == 'get' ){
                 this.store.commit('get')
-                this.userInput = ''
             }
         },
     },
