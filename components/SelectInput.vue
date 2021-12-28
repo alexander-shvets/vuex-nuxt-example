@@ -35,8 +35,9 @@ export default {
                 }
             }
         },
-        autocomplete(){
+        autocomplete(event){
             this.input = this.select
+            event.target.blur()
         },
     },
 }

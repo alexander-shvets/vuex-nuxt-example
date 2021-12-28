@@ -78,29 +78,27 @@ export default {
 }
 </script>
 <template lang="pug">
-    form.converter(action="javascript:alert('Done')")
+    form.exchange(action="javascript:alert('Done')")
         label You pay
             input(v-model="pay" name="pay" @keypress="validateNumber" size="10")
-        label.from in currency
             SelectInput(v-model="from" :base="to" :items="store.state.currencies")
-        label.to out currency
-            SelectInput(v-model="to" :base="from" :items="store.state.currencies")
         label You got
             input(v-model="get" name="get" @keypress="validateNumber" size="10")
+            SelectInput(v-model="to" :base="from" :items="store.state.currencies")
         footer 
             button(:disabled="(pay + get) == 0") Exchange
 </template>
 <style scoped lang="scss">
-    .converter{
-        width: 19ex;
+    .exchange { 
+        width: 30ex;
         font-size: 12pt;
     }
-    .converter > label {
+    .exchange > label {
         display: flex;
         justify-content: space-between;
         margin: 0.5ex 0ex;
     }
-    footer{
+    footer {
         margin-top: 1ex;
         text-align: right;
     }

@@ -10,7 +10,8 @@ export function exchange(
     const rate = rates.find(pair)?.rate || 1
     const commision = commisions.find(pair)?.commision || 0
     const gross = amount * rate
-    return gross - commision * (gross / 100)
+    const net = gross - commision * (gross / 100)
+    return {gross, net, rate, commision}
 }
 
 export const generateCommisions = ( 
@@ -24,7 +25,6 @@ export const generateCommisions = (
         }))
     )
 
-
 export function generateRates(currencies: Readonly<Currency[]>){
     let rates = new Array(currencies.length)
     return currencies.flatMap( (base, baseIndex) => {
@@ -33,10 +33,10 @@ export function generateRates(currencies: Readonly<Currency[]>){
             let rate = rates[quoteIndex] && rates[quoteIndex][baseIndex]
             if( rate ){
                 rate = 1 / rate
-            }else{
-                rates[baseIndex][quoteIndex] = 
+            } else {
                 rate = (base === quote ? 1 : random(10, 100))
             }
+            rates[baseIndex][quoteIndex] = rate
             console.log(base, quote, rate.toFixed(2))
             return {base, quote, rate}
         })

@@ -10,6 +10,8 @@ export const state = () => ({
     to: "UAH",
     pay: 0,
     get: 0,
+    rate: 1,
+    commision: 0,
     currencies,
     rates: [],
     commisions: [],
@@ -19,9 +21,9 @@ export const mutations = {
     set: (state: State, payload: Partial<State>) =>
         Object.assign(state, payload),
     pay: (state: State) => 
-        state.get = Number(exchange(state.pay, state.from, state.to, state.rates, state.commisions).toFixed(2)),
+        state.get = Number(exchange(state.pay, state.from, state.to, state.rates, state.commisions).net.toFixed(2)),
     get: (state: State) => 
-        state.pay = Number(exchange(state.get, state.to, state.from, state.rates, state.commisions).toFixed(2)),
+        state.pay = Number(exchange(state.get, state.to, state.from, state.rates, state.commisions).net.toFixed(2)),
 }
 
 export const actions = {
